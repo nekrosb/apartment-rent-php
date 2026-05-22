@@ -5,9 +5,12 @@ Laravel SSR-first starter for the apartment-rent project.
 ## Requirements
 
 - PHP 8.4+
+- php-pgsql
 - Composer 2+
 - Node.js + npm
-- SQLite
+- docker
+- postgres
+
 
 ## Local setup
 
