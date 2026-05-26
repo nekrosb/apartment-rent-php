@@ -1,0 +1,102 @@
+%%{init: {'theme':'dark'}}%%
+
+erDiagram
+
+USER {
+    int id PK
+    string name
+    string email
+    datetime email_verified_at
+    string password
+    string remember_token
+    int id_role FK
+    datetime created_at
+    datetime updated_at
+}
+
+PASSWORD_RESETS {
+    string email PK
+    string token
+    datetime created_at
+}
+
+SESSIONS {
+    string id PK
+    int user_id FK
+    string ip_address
+    string user_agent
+    text payload
+    int last_activity
+}
+
+USER ||--o{ SESSIONS : has
+USER ||--o| PASSWORD_RESETS : resets
+
+USER_PROFILE {
+    int id PK
+    int user_id FK
+    string first_name
+    string last_name
+     date date_of_birth
+    string phone_number
+    string profile_picture_url
+    int renter_rating
+    int client_rating
+    datetime created_at
+    datetime updated_at
+}
+
+USER ||--|| USER_PROFILE : has
+
+APARTMENT {
+    int id PK
+    string Title
+    string description
+    string address
+    int city FK
+    string state
+    int price
+    int number_of_bedrooms
+    int number_of_bathrooms
+    int user_id FK
+    int[] images fk
+    datetime created_at
+    datetime updated_at
+}
+
+USER ||--o{ APARTMENT : owns
+
+BOOKINGS {
+    int id PK
+    int user_id FK
+    int apartment_id FK
+    int total_price
+    date start_date
+    date end_date
+    datetime created_at
+    datetime updated_at
+}
+
+USER ||--o{ BOOKINGS : rents
+APARTMENT ||--o{ BOOKINGS : is_rented_by
+
+CITY {
+    int id PK
+    string name
+}
+
+CITY ||--o{ APARTMENT : has
+
+ROLE {
+    int id PK
+    string name
+}
+USER ||--o{ ROLE : has
+
+APARTMENT_IMAGES {
+    int id PK
+    int apartment_id FK
+    string image_url
+}
+
+APARTMENT ||--|{ APARTMENT_IMAGES : has
