@@ -9,6 +9,7 @@ USER {
     datetime email_verified_at
     string password
     string remember_token
+    int id_role FK
     datetime created_at
     datetime updated_at
 }
@@ -25,7 +26,7 @@ SESSIONS {
     string ip_address
     string user_agent
     text payload
-    datetime last_activity
+    int last_activity
 }
 
 USER ||--o{ SESSIONS : has
@@ -39,7 +40,7 @@ USER_PROFILE {
      date date_of_birth
     string phone_number
     string profile_picture_url
-    int render_rating
+    int renter_rating
     int client_rating
     datetime created_at
     datetime updated_at
@@ -49,15 +50,16 @@ USER ||--|| USER_PROFILE : has
 
 APARTMENT {
     int id PK
-    string name
+    string Title
     string description
     string address
-    string city
+    int city FK
     string state
-    float price
+    int price
     int number_of_bedrooms
     int number_of_bathrooms
     int user_id FK
+    int[] images fk
     datetime created_at
     datetime updated_at
 }
@@ -68,6 +70,7 @@ BOOKINGS {
     int id PK
     int user_id FK
     int apartment_id FK
+    int total_price
     date start_date
     date end_date
     datetime created_at
@@ -76,3 +79,24 @@ BOOKINGS {
 
 USER ||--o{ BOOKINGS : rents
 APARTMENT ||--o{ BOOKINGS : is_rented_by
+
+CITY {
+    int id PK
+    string name
+}
+
+CITY ||--o{ APARTMENT : has
+
+ROLE {
+    int id PK
+    string name
+}
+USER ||--o{ ROLE : has
+
+APARTMENT_IMAGES {
+    int id PK
+    int apartment_id FK
+    string image_url
+}
+
+APARTMENT ||--|{ APARTMENT_IMAGES : has
