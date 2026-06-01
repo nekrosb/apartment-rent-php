@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('apartment', function (Blueprint $table) {
+        Schema::create('apartments', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->text('description');
@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('bedrooms');
             $table->integer('bathrooms');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreingId("city_id")->constrained()->onDelete('cascade');
+            $table->foreignId("city_id")->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('apartment');
+        Schema::dropIfExists('apartments');
     }
 };
