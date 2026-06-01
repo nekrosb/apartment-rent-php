@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string("last_name");
             $table->date("date_of_birth");
             $table->string("phone_number")->nullable();
-            $table->string("profile_picture")->nullable()->nullable();
+            $table->string("profile_picture")->nullable();
             $table->integer("renter_rating")->default(0);
             $table->integer("owner_rating")->default(0);
             $table->timestamps();
