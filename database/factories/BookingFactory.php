@@ -18,7 +18,11 @@ class BookingFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'user_id' => \App\Models\User::factory(),
+            'apartment_id' => \App\Models\Apartment::factory(),
+            'total_price' => $this->faker->numberBetween(100, 1000),
+            'start_date' => $this->faker->dateTimeBetween('now', '+1 month'),
+            'end_date' => $this->faker->dateTimeBetween('+1 month', '+2 months'),
         ];
     }
 }
