@@ -117,23 +117,43 @@
 
                         </div>
 
-                        <form>
+                        <form method="POST" action="{{ route('login.submit') }}">
+
+
+                                                        @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+                            
+                            @csrf
+                            
+
+
 
                             <div class="mb-3">
-                                <label class="form-label">Email</label>
-                                <input type="email" class="form-control" placeholder="you@example.com">
+                                <label class="form-label" for="email">Email</label>
+                                <input type="email" id="email" name="email" class="form-control" placeholder="you@example.com">
                             </div>
 
                             <div class="mb-3">
-                                <label class="form-label">Password</label>
-                                <input type="password" class="form-control" placeholder="Enter password">
+                                <label class="form-label" for="password">Password</label>
+                                <input type="password" id="password" name="password" class="form-control" placeholder="Enter password">
                             </div>
 
                             <div class="d-flex justify-content-between mb-4">
 
                                 <div>
-                                    <input type="checkbox">
-                                    <small>Remember me</small>
+
+                                    <input type="checkbox" id="remember" name="remember" class="form-check-input">
+                                    <label class="form-label" for="remember">
+                                        Remember me
+                                    </label>
                                 </div>
 
                                 <a href="#" class="text-decoration-none">

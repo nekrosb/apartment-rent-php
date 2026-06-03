@@ -127,13 +127,13 @@
                             
 
                             <div class="mb-3">
-                                <label class="form-label">Username</label>
-                                <input type="text" name="name" class="form-control" placeholder="your_nickname">
+                                <label class="form-label" for="name">Username</label>
+                                <input id="name" type="text" name="name" class="form-control" placeholder="your_nickname">
                             </div>
 
                             <div class="mb-3">
-                                <label class="form-label">Email</label>
-                                <input type="email" name="email" class="form-control" placeholder="you@example.com">
+                                <label class="form-label" for="email">Email</label>
+                                <input id="email" type="email" name="email" class="form-control" placeholder="you@example.com">
                             </div>
 
                             <div class="mb-3">
@@ -142,13 +142,16 @@
                             </div>
 
                             <div class="mb-3">
-                                <label class="form-label">Confirm Password</label>
-                                <input type="password" name="password_confirmation" class="form-control" placeholder="Repeat password">
+                                <label class="form-label" for="password_confirmation">Confirm Password</label>
+                                <input id="password_confirmation" type="password" name="password_confirmation" class="form-control" placeholder="Repeat password">
                             </div>
 
                             <div class="mb-3">
-                                <input type="checkbox">
-                                <small> I agree to <a href="/terms">Terms & Conditions</a> </small>
+
+                                <input type="checkbox" name="terms" id="terms" required>
+                                <label class="form-label" for="terms">
+                                    I agree to <a href="/terms">Terms & Conditions</a>
+                                </label>
                             </div>
 
                             <button class="btn btn-rentzilla w-100 text-white">
