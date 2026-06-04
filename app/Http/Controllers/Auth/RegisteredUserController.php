@@ -46,6 +46,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(route('/login'))->with('success', 'Registration successful! Please check your email to verify your account.');
+        return redirect(route('login'))->with('success', 'Registration successful! Please check your email to verify your account.');
     }
 }

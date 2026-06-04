@@ -117,7 +117,7 @@
 
                         </div>
 
-                        <form method="POST" action="{{ route('login.submit') }}">
+                        <form method="POST" action="{{ route('login') }}">
 
 
                                                         @if ($errors->any())
@@ -156,7 +156,7 @@
                                     </label>
                                 </div>
 
-                                <a href="#" class="text-decoration-none">
+                                <a href="{{ route('password.request') }}" class="text-decoration-none">
                                     Forgot password?
                                 </a>
 
@@ -169,7 +169,7 @@
                             <div class="text-center mt-3">
                                 <small>
                                     Don’t have an account?
-                                    <a href="#">Sign up</a>
+                                    <a href="{{ route('register') }}">Sign up</a>
                                 </small>
                             </div>
 
