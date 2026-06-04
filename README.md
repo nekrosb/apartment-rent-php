@@ -9,7 +9,7 @@ Laravel SSR-first starter for the apartment-rent project.
 - Composer 2+
 - Node.js + npm
 - docker
-- postgres
+
 
 
 ## Local setup
@@ -17,12 +17,11 @@ Laravel SSR-first starter for the apartment-rent project.
 ```bash
 composer install
 cp .env.example .env
-php -r "file_exists('database/database.sqlite') || touch('database/database.sqlite');"
+docker compose up -d // from compose.yaml copy host name, userName, password to .enf file
 php artisan key:generate
 php artisan migrate
-npm install
 ```
-
+- into .env file you need write smtp cline of gmail for example with your login and app password from google accounte
 ## Run locally
 
 ```bash
