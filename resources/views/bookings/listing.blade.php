@@ -89,12 +89,12 @@
             <form action="{{ route('listing.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
-                @if(session('success'))
+                @if(session('error'))
     <div class="alert alert-success">
-        {{ session('success') }}
+        {{ session('error') }}
     </div>
 @endif
-4
+
                 <!-- TITLE -->
                 <div class="mb-3">
                     <label for="title" class="form-label">Title</label>

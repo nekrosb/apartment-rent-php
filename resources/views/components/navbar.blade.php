@@ -76,7 +76,7 @@
 
                     <li class="nav-item">
                         <a class="btn btn-rentzilla-nav ms-lg-2" href="{{ route('listing') }}">
-                            + Create booking
+                            + Create listing
                         </a>
                     </li>
 

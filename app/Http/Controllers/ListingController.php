@@ -27,29 +27,55 @@ class ListingController extends Controller
             'rooms' => 'required|integer',
             'bathrooms' => 'required|integer',
             'city' => 'required|exists:cities,id',
-            'photos.*' => 'image|mimes:jpeg,png,jpg,webp|max:10480'
+            'photos.*' => 'required|image|mimes:jpeg,png,jpg,webp|max:10480'
         ]);
 
-        $apartment = Apartment::create([
-            'title' => $request->title,
-            'description' => $request->description,
-            'address' => $request->address,
-            'price' => $request->price,
-            'bedrooms' => $request->rooms,
-            'bathrooms' => $request->bathrooms,
-            'user_id' => Auth::id(),
-            'city_id' => $request->city
-        ]);
+        DB::beginTransaction();
 
-        if ($request->hasFile('photos')) {
-            foreach ($request->file('photos') as $photo) {
-                $path = $photo->store("public/apartment_photos/{$apartment->id}");
-                Image::create([
-                    'image_path' => $path,
-                    'apartment_id' => $apartment->id
-                ]);
+        try {
+            $apartment = Apartment::create([
+                'title' => $request->title,
+                'description' => $request->description,
+                'address' => $request->address,
+                'price' => $request->price,
+                'bedrooms' => $request->rooms,
+                'bathrooms' => $request->bathrooms,
+                'user_id' => Auth::id(),
+                'city_id' => $request->city
+            ]);
+
+            $storedPaths = [];
+
+            if ($request->hasFile('photos')) {
+                foreach ($request->file('photos') as $photo) {
+                    $path = $photo->store("public/apartment_photos/{$apartment->id}");
+                    $storedPaths[] = $path;
+
+                    Image::create([
+                        'image_path' => $path,
+                        'apartment_id' => $apartment->id
+                    ]);
+                }
             }
+
+            DB::commit();
+
+            return redirect()
+                ->route('dashboard')
+                ->with('success', 'Apartment listed successfully!');
+        } catch (\Throwable $e) {
+            DB::rollBack();
+
+
+            if (!empty($storedPaths)) {
+                foreach ($storedPaths as $path) {
+                    Storage::delete($path);
+                }
+            }
+
+            return redirect()
+                ->back()
+                ->withErrors(['error' => 'Failed to list apartment. Please try again.']);
         }
-        return redirect()->route('dashboard')->with('success', 'Apartment listed successfully!');
     }
 }
