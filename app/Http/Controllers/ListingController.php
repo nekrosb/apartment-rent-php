@@ -23,17 +23,11 @@ class ListingController extends Controller
     {
         DB::beginTransaction();
 
+        $data = $request->validated();
+
+        $data['user_id'] = Auth::id();
         try {
-            $apartment = Apartment::create([
-                'title' => $request->title,
-                'description' => $request->description,
-                'address' => $request->address,
-                'price' => $request->price,
-                'bedrooms' => $request->bedrooms,
-                'bathrooms' => $request->bathrooms,
-                'user_id' => Auth::id(),
-                'city_id' => $request->city_id
-            ]);
+            $apartment = Apartment::create($data);
 
             $storedPaths = [];
 
