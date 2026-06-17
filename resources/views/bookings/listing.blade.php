@@ -86,8 +86,15 @@
 
         <div class="form-card shadow-sm">
 
-            <form>
+            <form action="{{ route('listing.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf
 
+                @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+4
                 <!-- TITLE -->
                 <div class="mb-3">
                     <label for="title" class="form-label">Title</label>
@@ -111,13 +118,9 @@
                 <div class="mb-3">
                     <label for="city" class="form-label">City</label>
                     <select id="city" name="city" class="form-select" required>
-                        <option selected disabled>Select city</option>
-
-                        <!-- будет из базы -->
-                        <option>Lausanne</option>
-                        <option>Geneva</option>
-                        <option>Zurich</option>
-                        <option>Bern</option>
+                        @foreach($cities as $city)
+                            <option value="{{ $city->id }}">{{ $city->name }}</option>
+                        @endforeach
                     </select>
                 </div>
 
@@ -145,10 +148,9 @@
 
                 <!-- UPLOAD -->
                 <div class="mb-4">
-                    <label for="photos" class="form-label">Photos</label>
-
-                    <label class="upload-box w-100">
-                        <input id="photos" name="photos" type="file" multiple hidden accept="image/png, image/jpeg, image/webp" required>
+                    <label class="form-label">Photos</label>
+                    <label for="photos" class="upload-box w-100">
+                        <input id="photos" name="photos[]" type="file" multiple accept="image/png, image/jpeg, image/webp" required>
                         <div>
                             <strong>Click to upload</strong> or drag & drop images here
                             <div class="hint-text mt-2">

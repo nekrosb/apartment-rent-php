@@ -2,17 +2,126 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\City;
 use Illuminate\Database\Seeder;
+use App\Models\City;
 
 class CitySeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        City::factory()->count(10)->create();
+        $cities = [
+            'Zürich',
+            'Geneva',
+            'Basel',
+            'Lausanne',
+            'Bern',
+            'Winterthur',
+            'Lucerne',
+            'St. Gallen',
+            'Lugano',
+            'Biel/Bienne',
+            'Thun',
+            'Köniz',
+            'La Chaux-de-Fonds',
+            'Fribourg',
+            'Schaffhausen',
+            'Chur',
+            'Neuchâtel',
+            'Vernier',
+            'Uster',
+            'Sion',
+            'Emmen',
+            'Yverdon-les-Bains',
+            'Zug',
+            'Dübendorf',
+            'Kriens',
+            'Wetzikon',
+            'Rapperswil-Jona',
+            'Wil',
+            'Nyon',
+            'Montreux',
+            'Wettingen',
+            'Baar',
+            'Horgen',
+            'Aarau',
+            'Sierre',
+            'Bulle',
+            'Renens',
+            'Kloten',
+            'Carouge',
+            'Adliswil',
+            'Allschwil',
+            'Onex',
+            'Herisau',
+            'Baden',
+            'Freienbach',
+            'Wohlen',
+            'Opfikon',
+            'Regensdorf',
+            'Bellinzona',
+            'Locarno',
+            'Martigny',
+            'Frauenfeld',
+            'Solothurn',
+            'Riehen',
+            'Dietikon',
+            'Gossau',
+            'Illnau-Effretikon',
+            'Kreuzlingen',
+            'Muttenz',
+            'Pratteln',
+            'Arbon',
+            'Romanshorn',
+            'Pully',
+            'Meyrin',
+            'Thalwil',
+            'Cham',
+            'Spiez',
+            'Meilen',
+            'Uzwil',
+            'Morges',
+            'Zofingen',
+            'Liestal',
+            'Steffisburg',
+            'Nidau',
+            'Sursee',
+            'Burgdorf',
+            'Lyss',
+            'Worb',
+            'Glarus',
+            'Altstätten',
+            'Einsiedeln',
+            'Sarnen',
+            'Stans',
+            'Schwyz',
+            'Altdorf',
+            'Brig',
+            'Visp',
+            'Zermatt',
+            'Davos',
+            'Arosa',
+            'St. Moritz',
+            'Klosters',
+            'Samedan',
+            'Pontresina',
+            'Grindelwald',
+            'Interlaken',
+            'Gstaad',
+            'Lenzerheide',
+            'Flims',
+            'Laax',
+            'Andermatt',
+            'Crans-Montana',
+            'Verbier',
+            'Saas-Fee',
+        ];
+
+        $data = array_map(fn($city) => [
+            'name' => $city,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ], $cities);
+
+        City::insert($data);
     }
 }

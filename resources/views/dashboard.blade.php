@@ -66,6 +66,14 @@
 
 <!-- NAVBAR -->
 <x-navbar />
+
+@if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
+
 <main class="flex-grow-1 py-5">
 
     <div class="container">
