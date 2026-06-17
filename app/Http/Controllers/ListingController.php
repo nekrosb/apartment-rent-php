@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\Models\Apartment;
 use App\Models\Image;
 use App\Models\City;
 use App\Models\User;
+use App\Http\Requests\StoreApartmentRequest;
 
 class ListingController extends Controller
 {
@@ -17,19 +19,8 @@ class ListingController extends Controller
         return view('bookings.listing', compact('cities'));
     }
 
-    public function store(Request $request)
+    public function store(StoreApartmentRequest $request)
     {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'address' => 'required|string|max:255',
-            'price' => 'required|numeric',
-            'rooms' => 'required|integer',
-            'bathrooms' => 'required|integer',
-            'city' => 'required|exists:cities,id',
-            'photos.*' => 'required|image|mimes:jpeg,png,jpg,webp|max:10480'
-        ]);
-
         DB::beginTransaction();
 
         try {
@@ -38,10 +29,10 @@ class ListingController extends Controller
                 'description' => $request->description,
                 'address' => $request->address,
                 'price' => $request->price,
-                'bedrooms' => $request->rooms,
+                'bedrooms' => $request->bedrooms,
                 'bathrooms' => $request->bathrooms,
                 'user_id' => Auth::id(),
-                'city_id' => $request->city
+                'city_id' => $request->city_id
             ]);
 
             $storedPaths = [];

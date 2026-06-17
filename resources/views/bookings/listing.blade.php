@@ -116,8 +116,8 @@
 
                 <!-- CITY SELECT -->
                 <div class="mb-3">
-                    <label for="city" class="form-label">City</label>
-                    <select id="city" name="city" class="form-select" required>
+                    <label for="city_id" class="form-label">City</label>
+                    <select id="city_id" name="city_id" class="form-select" required>
                         @foreach($cities as $city)
                             <option value="{{ $city->id }}">{{ $city->name }}</option>
                         @endforeach
@@ -134,8 +134,8 @@
 
                     <!-- ROOMS -->
                     <div class="col-md-6 mb-3">
-                        <label for="rooms" class="form-label">Rooms</label>
-                        <input id="rooms" name="rooms" type="number" class="form-control" placeholder="e.g. 2" required>
+                        <label for="bedrooms" class="form-label">Rooms</label>
+                        <input id="bedrooms" name="bedrooms" type="number" class="form-control" placeholder="e.g. 2" required>
                     </div>
 
                     <!-- BATHROOMS -->
