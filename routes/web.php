@@ -21,3 +21,7 @@ Route::get('/terms', function () {
 
 // auth routes from breeze package
 require __DIR__ . '/auth.php';
+
+Route::get('/bookings/listing', function () {
+    return view('bookings.listing');
+})->name('listing');

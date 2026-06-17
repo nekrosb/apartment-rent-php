@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->string('address');
-            $table->string("status");
+            $table->string("status")->default("available");
             $table->decimal('price', 10, 2);
             $table->integer('bedrooms');
             $table->integer('bathrooms');
